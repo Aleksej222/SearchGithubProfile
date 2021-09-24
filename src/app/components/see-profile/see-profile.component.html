@@ -1,8 +1,13 @@
 <h1 class="text-center mt-3">Look up Profile</h1>
 
-<div>
-    <div>
-        <input type="text" [(ngModel)]="user">
+<div class="container">
+    <div class="search-user">
+        <input type="text" [(ngModel)]="username">
         <button type="button" class="btn btn-primary" (click)="lookUpProfile()">Check</button>
+    </div>
+
+    <div>
+        <h3>User: {{user.owner.login}}</h3>
+        <img [src]="user.owner.avatar_url">
     </div>
 </div>

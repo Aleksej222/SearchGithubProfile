@@ -1,0 +1,9 @@
+.search-user {
+    background-color: rgb(29, 163, 118);
+    text-align: center;
+    margin-top: 4em;
+}
+
+input {
+    border: 2px solid black;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import User from 'src/app/models/user';
 import { GetUserService } from 'src/app/services/get-user.service';
 
 @Component({
@@ -7,7 +8,9 @@ import { GetUserService } from 'src/app/services/get-user.service';
   styleUrls: ['./see-profile.component.css']
 })
 export class SeeProfileComponent implements OnInit {
-  user: string;
+  username: string;
+
+  user: User = new User()
 
   constructor(
     private getUser: GetUserService
@@ -17,11 +20,13 @@ export class SeeProfileComponent implements OnInit {
   }
 
   lookUpProfile() {
-    console.log(this.user);
-    this.getUser.findUser(this.user).subscribe((respone) => {
-      console.log(respone);
+    console.log(this.username);
+    this.getUser.findUser(this.username).subscribe((response:any) => {
+      console.log(response);
+      this.user = response[0];
     });
 
   }
 
 }
+

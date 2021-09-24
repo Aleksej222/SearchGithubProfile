@@ -10,7 +10,8 @@ export class GetUserService {
     private _http: HttpClient
   ) { }
 
-  findUser(username: string) {
-    return this._http.get(`https://api.github.com/users/${username}/repos`);
+  findUser(username: string, page:number=0) {
+    
+    return this._http.get(`https://api.github.com/users/${username}/repos?page=${page.toString()}`);
   }
 }
