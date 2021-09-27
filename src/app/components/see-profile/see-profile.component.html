@@ -7,7 +7,14 @@
     </div>
 
     <div>
-        <h3>User: {{user.owner.login}}</h3>
-        <img [src]="user.owner.avatar_url">
+        <h3>User: {{user.login}}</h3>
+        <img [src]="user.avatar_url">
+    </div>
+
+    <div *ngFor="let item of user.repositories">
+        <p>Repository name:
+            <a [href]="(item.git_url | safe:'url') " target="_blank">{{item.name}}</a></p>
+        <p>Language: {{item.language}}</p>
+        <p>Description: {{item.description}}</p>
     </div>
 </div>

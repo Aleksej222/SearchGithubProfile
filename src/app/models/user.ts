@@ -1,15 +1,28 @@
-export default class User {
+export abstract class BaseResponse{
     html_url: string; //user link
     created_at: string;
     updated_at: string;
-    full_name: string; //repo name
+    name: string; //repo name
     language: string;
-    description: string;
+    description: string | null;
     git_url: string; //repo link
     homepage: string | null;
-    owner: Owner = new Owner();
-}
-export class Owner {
-    login: string; //username   owner.login
+    login: string;
     avatar_url: string;
 }
+
+
+export default class User extends BaseResponse{
+    
+    repositories:Repository[];
+
+}
+export class Repository extends BaseResponse{
+
+}
+
+
+// export class Owner {
+//     login: string; //username   owner.login
+//     avatar_url: string;
+// }

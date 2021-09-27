@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { SeeProfileComponent } from './components/see-profile/see-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SafePipeModule } from 'safe-pipe';
+import { SafePipe } from 'safe-pipe/lib/safe-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SeeProfileComponent
+    SeeProfileComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SafePipeModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
