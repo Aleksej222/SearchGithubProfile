@@ -10,8 +10,8 @@ export class GetUserService {
     private _http: HttpClient
   ) { }
 
-  findUser(username: string, page:number=0) {
+  findUser(username: string) {
     
-    return this._http.get(`https://api.github.com/users/${username}/repos?page=${page.toString()}`);
+    return this._http.get(`https://api.github.com/users/${username}/repos?sort=created&direction=desc&per_page=100&order=desc`);
   }
 }
