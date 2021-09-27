@@ -6,15 +6,24 @@
         <button type="button" class="btn btn-primary" (click)="lookUpProfile()">Check</button>
     </div>
 
-    <div>
-        <h3>User: {{user.login}}</h3>
+    <div class="text-center">
+        <h3>User:
+            <a [href]="(user.html_url | safe:'url') " target="_blank">{{user.login}}</a>
+        </h3>
         <img [src]="user.avatar_url">
     </div>
 
-    <div *ngFor="let item of user.repositories">
-        <p>Repository name:
-            <a [href]="(item.git_url | safe:'url') " target="_blank">{{item.name}}</a></p>
-        <p>Language: {{item.language}}</p>
-        <p>Description: {{item.description}}</p>
+    <div class="search-results" infinite-scroll (scrolled)="onScroll()" [infiniteScrollDistance]="2">
+        <div *ngFor="let item of user.repositories" class="text-center">
+            <p>Repository name:
+                <a [href]="(item.git_url | safe:'url') " target="_blank">{{item.name}}</a>
+            </p>
+            <p>Language: {{item.language}}</p>
+            <p>Description: {{item.description}}</p>
+            <p>Created at: {{item.created_at}}</p>
+            <p>Updated at: {{item.updated_at}}</p>
+            <p *ngIf="item.homepage">Homepage: <a [href]="(item.homepage | safe:'url') " target="_blank">{{item.homepage}}</a></p>
+            <br>
+        </div>
     </div>
 </div>

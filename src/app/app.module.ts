@@ -7,20 +7,20 @@ import { SeeProfileComponent } from './components/see-profile/see-profile.compon
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SafePipeModule } from 'safe-pipe';
-import { SafePipe } from 'safe-pipe/lib/safe-pipe.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 @NgModule({
   declarations: [
     AppComponent,
-    SeeProfileComponent,
-    
+    SeeProfileComponent, 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SafePipeModule 
+    SafePipeModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

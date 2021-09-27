@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetUserService {
-
+  items: number = 10;
   constructor(
     private _http: HttpClient
   ) { }
 
   findUser(username: string): Observable<User> {
 
-    return this._http.get(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100&order=desc`).pipe(
+    return this._http.get(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=${this.items}&order=desc`).pipe(
       map((response: any) => {
         let user = response[0].owner;
         //this.user.login = response[0].owner.login  //get only one piece of data

@@ -39,8 +39,15 @@ export class SeeProfileComponent implements OnInit {
        //  this.user.name = response[i].name;
        //  this.user.language = response[i].language;
       // }
+      this.getUser.items += 10;
     });
     this.username = "";
+  }
+
+  onScroll() {
+  //  this.getUser.items += 10;
+   this.lookUpProfile()
+   console.log(this.getUser.items);
   }
 
 }
