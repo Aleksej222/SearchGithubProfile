@@ -11,6 +11,7 @@ export class SeeProfileComponent implements OnInit {
   username: string;
   _username: string;
   user: User = new User()
+  error: boolean = false;
 
   constructor(
     private getUser: GetUserService
@@ -20,33 +21,48 @@ export class SeeProfileComponent implements OnInit {
   }
 
   lookUpProfile() {
-    console.log(this.username);
-    this._username = this.username;
-    this.getUser.page = 1;
-    this.getUser.findUser(this._username).subscribe((user) => {
-     
-      this.user=user;
-
-      // console.log(response);
-      // this.data = response;
-
-      //this.user = response[0];  //get all data
-      
-      //this.repoes = response;
-      // this.user=response[0].owner;
-      // //this.user.login = response[0].owner.login  //get only one piece of data
-      // //this.user.avatar_url = response[0].owner.avatar_url
-      // this.user.repositories = response;
-      //less efficient way
-      // for (let i = 0; i < response.length; i++) {
-       //  this.user.name = response[i].name;
-       //  this.user.language = response[i].language;
-      // }
-      // this.getUser.items += 10;
-      // this.getUser.page++;
-    });
-    this.username = "";
+    if(this.username == "" || this.username == undefined) {
+      alert("You have to enter a username!");
+    }
+    else {
+      console.log(this.username);
+      this._username = this.username;
+      this.getUser.page = 1;
+      this.getUser.findUser(this.username).subscribe((user) => {
+        this.error = false;
+        this.user=user;
+        this.username = "";
+        // console.log(response);
+        // this.data = response;
   
+        //this.user = response[0];  //get all data
+        
+        //this.repoes = response;
+        // this.user=response[0].owner;
+        // //this.user.login = response[0].owner.login  //get only one piece of data
+        // //this.user.avatar_url = response[0].owner.avatar_url
+        // this.user.repositories = response;
+        //less efficient way
+        // for (let i = 0; i < response.length; i++) {
+         //  this.user.name = response[i].name;
+         //  this.user.language = response[i].language;
+        // }
+        // this.getUser.items += 10;
+        // this.getUser.page++;
+      },
+      (err) => {
+        this.username = "";
+        this.user=new User();
+        if (err.status == 404) {
+          return this.error = true
+        }
+        else {
+          return this.error = false;
+        }
+       
+      }
+      );
+    }
   }
 
   onScroll() {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from "rxjs/operators";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, retry } from "rxjs/operators";
 import User, { Repository } from '../models/user';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,13 @@ export class GetUserService {
         // user.git_url=response.git_url
         console.log(response);
         return user;
-      }));
+      })
+      );
+  }
+
+  userNotFound() {
+    let err = "User not found";
+    alert("!!!!!!!!!");
+    return err;
   }
 }
