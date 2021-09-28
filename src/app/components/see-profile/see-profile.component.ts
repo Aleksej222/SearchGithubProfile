@@ -9,8 +9,7 @@ import { GetUserService } from 'src/app/services/get-user.service';
 })
 export class SeeProfileComponent implements OnInit {
   username: string;
-  repoes: Array<User>;
-  data: any;
+  _username: string;
   user: User = new User()
 
   constructor(
@@ -22,8 +21,12 @@ export class SeeProfileComponent implements OnInit {
 
   lookUpProfile() {
     console.log(this.username);
-    this.getUser.findUser(this.username).subscribe((user) => {
+    this._username = this.username;
+    this.getUser.page = 1;
+    this.getUser.findUser(this._username).subscribe((user) => {
+     
       this.user=user;
+
       // console.log(response);
       // this.data = response;
 
@@ -39,14 +42,18 @@ export class SeeProfileComponent implements OnInit {
        //  this.user.name = response[i].name;
        //  this.user.language = response[i].language;
       // }
-      this.getUser.items += 10;
+      // this.getUser.items += 10;
+      // this.getUser.page++;
     });
     this.username = "";
+  
   }
 
   onScroll() {
-  //  this.getUser.items += 10;
-   this.lookUpProfile()
+   this.getUser.page++;
+   this.getUser.findUser(this._username).subscribe((user) => {
+     this.user.repositories = this.user.repositories.concat(user.repositories);
+   });
    console.log(this.getUser.items);
   }
 
