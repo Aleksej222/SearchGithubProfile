@@ -6,9 +6,10 @@
         <button type="button" class="btn btn-primary" (click)="lookUpProfile()">Check</button>
     </div>
 
-    <div class="text-center" *ngIf="!error; else hasError">
+    <div class="text-center" *ngIf="user && error==false">
         <h3>User:
-            <a [href]="(user.html_url | safe:'url') " target="_blank">{{user.login}}</a>
+            <a [href]="(user.html_url | safe:'url') " target="_blank" *ngIf="user.login;else showJustUsername">{{user.login}}</a>
+            <ng-template #showJustUsername>{{_username}}</ng-template>
         </h3>
         <img [src]="user.avatar_url">
 
@@ -24,16 +25,16 @@
                 <p *ngIf="item.homepage">Homepage: <a [href]="(item.homepage | safe:'url') " target="_blank">{{item.homepage}}</a></p>
                 <br>
             </div>
-            <div *ngIf="username === '' && (!user.repositories || user.repositories.length==0)">
-                <h3>User {{username}} has no repositories</h3>
+            <div *ngIf="user.repositories==undefined || user.repositories.length==0">
+                <h3>User {{_username}} has no repositories</h3>
             </div>
         </div>
 
 
     </div>
-    <ng-template #hasError>
+    <ng-container *ngIf="error">
         <h3 class="text-center mt-3">User Not Found :( </h3>
-    </ng-template>
+    </ng-container>
 
 
 </div>

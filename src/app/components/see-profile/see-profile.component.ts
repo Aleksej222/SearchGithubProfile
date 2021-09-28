@@ -10,7 +10,7 @@ import { GetUserService } from 'src/app/services/get-user.service';
 export class SeeProfileComponent implements OnInit {
   username: string;
   _username: string;
-  user: User = new User()
+  user: User;
   error: boolean = false;
 
   constructor(
