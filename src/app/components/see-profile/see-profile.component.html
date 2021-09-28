@@ -24,9 +24,9 @@
                 <p *ngIf="item.homepage">Homepage: <a [href]="(item.homepage | safe:'url') " target="_blank">{{item.homepage}}</a></p>
                 <br>
             </div>
-            <!-- <div *ngIf="!user.repositories || user.repositories.length==0">
-                User has no repositories
-            </div> -->
+            <div *ngIf="username === '' && (!user.repositories || user.repositories.length==0)">
+                <h3>User {{username}} has no repositories</h3>
+            </div>
         </div>
 
 

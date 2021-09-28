@@ -8,7 +8,6 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class GetUserService {
-  items: number = 10;
   page: number = 1;
   constructor(
     private _http: HttpClient
@@ -30,11 +29,5 @@ export class GetUserService {
         return user;
       })
       );
-  }
-
-  userNotFound() {
-    let err = "User not found";
-    alert("!!!!!!!!!");
-    return err;
   }
 }

@@ -30,6 +30,7 @@ export class SeeProfileComponent implements OnInit {
       this.getUser.page = 1;
       this.getUser.findUser(this.username).subscribe((user) => {
         this.error = false;
+    
         this.user=user;
         this.username = "";
         // console.log(response);
@@ -70,7 +71,6 @@ export class SeeProfileComponent implements OnInit {
    this.getUser.findUser(this._username).subscribe((user) => {
      this.user.repositories = this.user.repositories.concat(user.repositories);
    });
-   console.log(this.getUser.items);
   }
 
 }
