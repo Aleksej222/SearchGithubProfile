@@ -21,8 +21,11 @@ export class SeeProfileComponent implements OnInit {
   }
 
   lookUpProfile() {
-    if(this.username == "" || this.username == undefined) {
+    if (this.username == "" || this.username == undefined) {
       alert("You have to enter a username!");
+    }
+    else if (!this.validateUser(this.username)) {
+      alert("Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.");
     }
     else {
       console.log(this.username);
@@ -71,6 +74,16 @@ export class SeeProfileComponent implements OnInit {
    this.getUser.findUser(this._username).subscribe((user) => {
      this.user.repositories = this.user.repositories.concat(user.repositories);
    });
+  }
+
+  validateUser(enteredUser: string) {
+    const re = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+    if (!enteredUser.match(re)) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 }
